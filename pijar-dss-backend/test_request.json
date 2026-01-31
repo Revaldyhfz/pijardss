@@ -1,0 +1,20 @@
+{
+  "initial_capital": {"type": "triangular", "params": {"min": 4000, "mode": 5000, "max": 6000}},
+  "dev_duration": {"type": "triangular", "params": {"min": 4, "mode": 6, "max": 9}},
+  "dev_burn": {"type": "triangular", "params": {"min": 160, "mode": 200, "max": 250}},
+  "leads_per_month": {"type": "triangular", "params": {"min": 4, "mode": 7, "max": 12}},
+  "win_rate_bumn": {"type": "beta", "params": {"alpha": 14, "beta": 6}},
+  "win_rate_open": {"type": "beta", "params": {"alpha": 4, "beta": 14}},
+  "bumn_ratio": 0.35,
+  "sales_cycle_months": {"type": "gamma", "params": {"shape": 6.25, "scale": 0.8}},
+  "contract_small": {"type": "lognormal", "params": {"mean": 180, "cv": 0.2}},
+  "contract_medium": {"type": "lognormal", "params": {"mean": 320, "cv": 0.15}},
+  "contract_large": {"type": "lognormal", "params": {"mean": 550, "cv": 0.1}},
+  "churn_rate": {"type": "beta", "params": {"alpha": 2, "beta": 18}},
+  "op_overhead": 120,
+  "cost_per_customer": 5,
+  "n_simulations": 500,
+  "time_horizon": 36,
+  "enable_regime_switching": true,
+  "enable_risk_events": false
+}
