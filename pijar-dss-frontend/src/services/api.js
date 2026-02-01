@@ -2,13 +2,22 @@
  * API Service for Pijar DSS Backend
  */
 
-const API_BASE_URL = '/api/v1';
+// [CHANGE] Use VITE_API_URL environment variable if available (Production),
+// otherwise fallback to '/api/v1' (Development/Local Proxy)
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 /**
  * Generic fetch wrapper with error handling
  */
 async function fetchAPI(endpoint, options = {}) {
-  const url = `${API_BASE_URL}${endpoint}`;
+  // Normalize the endpoint to ensure it starts with a slash
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  
+  // Construct the full URL
+  // We remove '/api/v1' from the endpoint if it is present to prevent duplication
+  // (e.g., if the base URL is '.../api/v1' and endpoint is '/api/v1/simulate')
+  const normalizedBase = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+  const url = `${normalizedBase}${cleanEndpoint.replace('/api/v1', '')}`;
   
   const defaultHeaders = {
     'Content-Type': 'application/json',
